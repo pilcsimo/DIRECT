@@ -1,0 +1,10 @@
+__pycache__/
+*.egg-info/
+
+.conda/
+.vscode/
+
+*.whl
+# Calibration files are machine-specific and should not be committed
+src/direct/direct_teleop/configs/*.calib.npy
+

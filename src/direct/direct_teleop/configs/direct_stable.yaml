@@ -1,0 +1,70 @@
+dynamixel:
+  # USB port name — find yours with: ls /dev/serial/by-id/
+  dynamixel_port: "usb-FTDI_USB__-__Serial_Converter_XXXXXXXX-if00-port0"
+  # Servo types
+  servo_types:
+    [
+      "XC330_T288_T",
+      "XM430_W210_T",
+      "XC330_T288_T",
+      "XM430_W210_T",
+      "XC330_T288_T",
+      "XC330_T288_T",
+      "XC330_T288_T",
+      "XC330_T288_T",
+    ]
+  # Servo joint directions to match that of the leader arm
+  joint_signs: [1, 1, 1, -1, 1, -1, 1, 1]
+
+arm_teleop:
+  # URDF used for creating leader arm dynamics model to compute gravity compensation
+  leader_urdf: "direct.urdf"
+  num_arm_joints: 7
+  # Low-pass filter alpha for smoothing joint position commands
+  low_pass_alpha: 0.1
+  arm_joint_limits_max: [2.8973, 1.7628, 2.8973, 0, 2.8973, 3.7525, 2.8973]
+  arm_joint_limits_min:
+    [-2.8973, -1.7628, -2.8973, -3.0718, -2.8973, -0.0175, -2.8973]
+  arm_joint_limits_safety_margin: 0.1
+  initialization:
+    # The leader arm posture used to align the follower before enabling teleop
+    initial_match_joint_pos: [0.0, -0.54763114, 0.0, -1.96963133,  0.0, 1.44807786, 0.0]
+
+gripper_teleop:
+  # Low-pass filter alpha for smoothing gripper commands
+  low_pass_alpha: 0.1
+  # Gripper actuation range
+  actuation_range: 1.0
+  # Gripper joint limits
+  gripper_joint_limits: [0.0, 1.0]
+
+controller:
+  frequency: 500
+  torque_feedback:
+    enable: False  # Force feedback disabled in this release (see README for rationale)
+    gain: 3.0
+    damping: 0.035
+    motor_scalar: 94.5652173913
+
+  gravity_comp:
+    enable: True
+    gain: 0.775
+  null_space_regulation:
+    null_space_joint_target: [-0.13935425877571106,-0.020481698215007782,-0.05201413854956627,-2.0691256523132324,0.05058913677930832,2.0028650760650635,-0.9167874455451965]
+    kp: 0.1  
+    kd: 0.01
+  static_friction_comp:
+    enable_speed: 0.9
+    gain: 0.2
+  joint_limit_barrier:
+    kp: 0.5
+    kd: 0.025
+  joint_position_control:
+    interpolation_step_size: 0.5
+    kp: 0.6
+    kd: 0.02
+
+  gripper_feedback: # attention this is THE VIRTUAL SPRING ON THE GRIPPER
+    enable: True
+    gain: 0.2
+    damping: 0.1

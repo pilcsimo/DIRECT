@@ -1,0 +1,58 @@
+﻿[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "DIRECT"
+version = "0.1.0"
+authors = [
+  { name="Simon Pilc", email="pilcsimo@cvut.cz" },
+]
+description = "DIRECT: Durable Intuitive Repeatable Ergonomic Control Device for Robot Teleoperation"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy<2",
+    "pyzmq",
+    "pynput",
+    "pin", # https://github.com/stack-of-tasks/pinocchio/ is published on PyPI as "pin" due to a naming conflict with another project (see https://github.com/mkwiatkowski/pinocchio/issues/28)
+    "pyyaml",
+    "setuptools",
+    "dynamixel_sdk",
+    "rich",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "pre-commit",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/pilcsimo/DIRECT"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 121
+target-version = "py38"
+exclude = ["src/direct/direct_teleop/dynamixel"]
+
+[tool.ruff.lint]
+select = ["A", "B", "C90", "E", "F", "I", "RUF", "W"]
+ignore = ["F405", "B006", "C901", "F403", "E722"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402", "F401"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["direct"]
+
+[tool.ruff.format]
+quote-style = "double"
