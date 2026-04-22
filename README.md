@@ -1,5 +1,7 @@
 # DIRECT: Durable Intuitive Repeatable Ergonomic Control Device for Robot Teleoperation
 
+This is the SW and HW repository of DIRECT. Visit the [website](https://ponimatkin.github.io/direct/index.html) for the paper and supplementary material.
+
 DIRECT is an active teleoperation leader arm designed for continuous, large-scale robot data collection with [DROID](https://droid-dataset.github.io/). It serves as a drop-in alternative to VR controllers, offering a more intuitive experience for operators familiar with robot arms.
 
 DIRECT builds on the hardware and software foundations of [FACTR](https://jasonjzliu.com/factr/) and draws mechanical inspiration from [GELLO](https://wuphilipp.github.io/gello_site/). It addresses three pain points encountered during sustained data collection: mechanical failures under continuous use, calibration drift between sessions, and operator fatigue during standing workflows.
